@@ -29,51 +29,65 @@ const App = () => {
   const [hotelsData, setHotelsData] = useState([]);
   const [setError] = useState(null);
   // add Hotels to home page 
+const PEXELS_API_KEY = 'jgXdXv1qjqOMr88dzyMnRtlAxHPfGxkCVbFgsRwv7OK4gN0VtvvixCtc'; 
+
+  const fetchHotelImage = async (hotelName) => {
+    try {
+      const response = await axios.get('https://api.pexels.com/v1/search', {
+        params: {
+          query: `${hotelName} hotel`,
+          per_page: 1,
+        },
+        headers: {
+          Authorization: PEXELS_API_KEY,
+        },
+      });
+      return response.data.photos[0]?.src.medium || 'default-hotel-image.jpg';
+    } catch (error) {
+      console.error('Error fetching image from Pexels:', error);
+      return 'default-hotel-image.jpg'; // Fallback image if there's an error
+    }
+  };
 
   useEffect(() => {
     const fetchHotels = async () => {
-      const options = {
-        method: 'GET',
-        url: 'https://airbnb13.p.rapidapi.com/search-geo',
-        params: {
-          ne_lat: '52.51',
-          ne_lng: '13.41',
-          sw_lat: '52.41',
-          sw_lng: '13.31',
-          checkin: '2025-01-12',
-          checkout: '2025-01-13',
-          adults: '1',
-          children: '0',
-          infants: '0',
-          pets: '0',
-          page: '1',
-          currency: 'USD',
-        },
-        headers: {
-          'x-rapidapi-key': 'dab7f2d7femsh9a39b95de1793b0p100eaejsn700693c9ed0a',
-          'x-rapidapi-host': 'hotels4.p.rapidapi.com',
-        },
-      };
+      const query = `
+        [out:json];
+        area["name"="Berlin"]["admin_level"="4"];
+        node["tourism"="hotel"](area);
+        out;
+      `;
+      const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
 
       try {
-        const response = await axios.request(options);
-        console.log('Response Data:', response.data.results);
+        const response = await axios.get(url);
+        const hotelNodes = response.data.elements;
 
-        setHotelsData(response.data.results || []);
-      } catch (error) {
-        if (error.response && error.response.status === 403) {
-          setError('Forbidden: Please check your API key and permissions.');
-        } else if (error.response && error.response.status === 429) {
-          setError('Too Many Requests: You have exceeded your API rate limit.');
-        } else {
-          setError('An error occurred while fetching hotel data.');
-        }
-        console.error('Error fetching hotel data:', error);
+        // Fetch images for each hotel in parallel, limit to 30 hotels
+        const hotelsWithImages = await Promise.all(
+          hotelNodes.slice(0, 30).map(async (hotel) => { // Limit to 30 hotels
+            const imageUrl = await fetchHotelImage(hotel.tags.name || 'Hotel');
+            return {
+              name: hotel.tags.name || 'No Name Available',
+              address: hotel.tags['addr:street']
+                ? `${hotel.tags['addr:street']}, ${hotel.tags['addr:city'] || ''}`
+                : 'No Address Available',
+              deeplink: `https://www.openstreetmap.org/?mlat=${hotel.lat}&mlon=${hotel.lon}#map=18/${hotel.lat}/${hotel.lon}`,
+              images: [imageUrl],
+              rating: null,
+              price: { total: '100', currency: '$' },
+            };
+          })
+        );
+        setHotelsData(hotelsWithImages);
+      } catch (err) {
+        setError('An error occurred while fetching hotel data.');
+        console.error(err);
       }
     };
 
     fetchHotels();
-  }, [setError]);
+  }, []);
 
   // Add new blog at the top
   const addBlog = (newBlog) => {

@@ -1,15 +1,13 @@
-import React, { useState} from 'react';
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
 
-const Hotels = ({hotelsData}) => {
 
-  const [error] = useState(null);
-
+const Hotels = ({hotelsData , error}) => {
  
-
   // Utility function to render star ratings
   const renderStars = (rating) => {
     const maxStars = 5;
-    const filledStars = Math.round(rating); // Round the rating to the nearest integer
+    const filledStars = Math.round(rating || 0);
     const emptyStars = maxStars - filledStars;
 
     return (
@@ -28,16 +26,13 @@ const Hotels = ({hotelsData}) => {
         {hotelsData && hotelsData.length > 0 ? (
           hotelsData.map((hotel, index) => (
             <div key={index} className="hotel-card">
-              {/* Wrap each card in an anchor tag that links to the deeplink */}
               <a href={hotel.deeplink} target="_blank" rel="noopener noreferrer">
-                <img src={hotel.images[0] || 'default-hotel-image.jpg'} alt="Hotel" className="hotel-image" />
+                <img src={hotel.images[0]} alt="Hotel" className="hotel-image" />
                 <div className="hotel-info">
-                  <h2>{hotel.name || 'No Name Available'}</h2>
+                  <h2>{hotel.name}</h2>
                   <p><strong>Price per night:</strong> {hotel.price.total} {hotel.price.currency}</p>
-                  <p>
-                    <strong>Rating:</strong> {hotel.rating || 'No Rating'} {renderStars(hotel.rating || 0)}
-                  </p>
-                  <p><strong>Address:</strong> {hotel.address || 'No Address Available'}</p>
+                  <p><strong>Rating:</strong> {hotel.rating ? renderStars(hotel.rating) : 'No Rating'}</p>
+                  <p><strong>Address:</strong> {hotel.address}</p>
                 </div>
               </a>
             </div>

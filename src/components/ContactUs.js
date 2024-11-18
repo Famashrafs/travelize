@@ -1,5 +1,5 @@
 import React from 'react';
-import contact from "../images/black-and-white-world-map-free-vector-removebg-preview.png"
+import contact from "../images/contact.png"
 const ContactUs = () => {
   return (
     <div className="contact-us">

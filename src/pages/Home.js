@@ -9,17 +9,28 @@ const Home = ({ blogs , hotelsData }) => {
   <div>
       <LandingPage/>
       <div className='recommended-hotels'>
-        <h2 style={{ fontWeight:"bold",fontSize:"40px", margin:"20px 0 0 30px"}}>Best Hotels</h2>
+        <h2 style={{ fontWeight:"bold",fontSize:"40px", margin:"20px 0 0 30px"}}>Rooms & Hotels</h2>
         <div className='hotel-list'>
-        {  hotelsData.length > 0 ? (
-            hotelsData.slice(0, 5).map((hotel, index) => (
-              <div key={index} className="blog-card">
+        {  hotelsData ? (
+            hotelsData.slice(0 , 1).map((hotel, index) => (
+              <div key={index} className='hotel-card main-hotel-card'>
                 <img src={hotel.images[0] || 'default-hotel-image.jpg'} alt="Hotel" className="hotel-image" />
               </div>
             ))
           ) : (
             <p>No blogs available yet.</p>
-          )}
+          )} 
+          <div className='rest-hotels'>     
+            {  hotelsData ? (
+                hotelsData.slice(14, 20).map((hotel, index) => (
+                  <div key={index} className='hotel-card'>
+                    <img src={hotel.images[0] || 'default-hotel-image.jpg'} alt="Hotel" className="hotel-image" />
+                  </div>
+                ))
+              ) : (
+                <p>No blogs available yet.</p>
+              )}
+          </div>
         </div>
       </div>
       <div className="blog-list-section">
@@ -43,8 +54,8 @@ const Home = ({ blogs , hotelsData }) => {
           )}
         </div>
       </div>
-      <DownloadSection />
       <Testimonials />
+      <DownloadSection />
       <ContactUs />
   </div>
   );

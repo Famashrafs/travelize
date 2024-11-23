@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // Import Link for navigation
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '../firebase';
+import defaultProfile from '../images/default-avatar.jpg'
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
   const [title, setTitle] = useState('');
@@ -9,12 +12,30 @@ const Blog = () => {
   const [mainImage, setMainImage] = useState(null);
   const [secondImage, setSecondImage] = useState(null);
   const [isCreatingBlog, setIsCreatingBlog] = useState(false);
-  const [personalInfo] = useState({
-    name: 'John Doe',
-    bio: 'Traveler, Explorer, and Blogger',
-    email: 'john.doe@email.com',
-  });
+  const [personalInfo , setPersonalInfo] = useState('');
+  const user = auth.currentUser;
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (user) {
+        try {
+          const docRef = doc(db, 'users', user.uid);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            setPersonalInfo(data); // Update the userData in App
 
+          } else {
+            console.log('No such document!');
+          }
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [user, setPersonalInfo]);
+  console.log(personalInfo)
   useEffect(() => {
     const savedBlogs = JSON.parse(localStorage.getItem('blogs')) || [];
     setBlogs(savedBlogs);
@@ -71,9 +92,8 @@ const Blog = () => {
   return (
     <div className="blog-page-container">
       <div className="personal-info">
-        <h3>{personalInfo.name}</h3>
-        <p>{personalInfo.bio}</p>
-        <p>{personalInfo.email}</p>
+        <img src={personalInfo.profilePicUrl || defaultProfile} alt={`${personalInfo.displayName}'s profile`} style={{width:"50px",height:"50px",borderRadius:"50%"}}/>
+        <h3>{personalInfo.displayName}</h3>
         <button className="create-blog-btn" onClick={() => setIsCreatingBlog(!isCreatingBlog)}>
           Create a New Blog Post
         </button>

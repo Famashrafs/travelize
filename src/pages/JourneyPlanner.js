@@ -60,7 +60,7 @@ const JourneyPlanner = () => {
       nextSlide();
     }, 3000); // Change slide every 3 seconds
     return () => clearInterval(interval);
-  }, [currentIndex]);
+  });
   return (
     <div className="journey-planner">
       <SearchBar onSearch={handleSearch} />

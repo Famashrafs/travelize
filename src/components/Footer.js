@@ -46,7 +46,7 @@ const Footer = () => {
           <h3>Get Social</h3>
           <p>Keep up-to-date with the latest social media news. Exciting things happening this year.</p>
           <div className="social-icons">
-            <a href="#v"> <FontAwesomeIcon icon="fa-brands fa-facebook" /></a>
+            {/* <a href="#v"> <FontAwesomeIcon icon="fa-brands fa-facebook" /></a> */}
 {/*            
             <a href="#"><i className="fa fa-google"></i></a>
             <a href="#"><i className="fa fa-twitter"></i></a>

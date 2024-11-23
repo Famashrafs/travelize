@@ -8,33 +8,9 @@ const Home = ({ blogs , hotelsData }) => {
   return (
   <div>
       <LandingPage/>
-      <div className='recommended-hotels'>
-        <h2 style={{ fontWeight:"bold",fontSize:"40px", margin:"20px 0 0 30px"}}>Rooms & Hotels</h2>
-        <div className='hotel-list'>
-        {  hotelsData ? (
-            hotelsData.slice(0 , 1).map((hotel, index) => (
-              <div key={index} className='hotel-card main-hotel-card'>
-                <img src={hotel.images[0] || 'default-hotel-image.jpg'} alt="Hotel" className="hotel-image" />
-              </div>
-            ))
-          ) : (
-            <p>No blogs available yet.</p>
-          )} 
-          <div className='rest-hotels'>     
-            {  hotelsData ? (
-                hotelsData.slice(14, 20).map((hotel, index) => (
-                  <div key={index} className='hotel-card'>
-                    <img src={hotel.images[0] || 'default-hotel-image.jpg'} alt="Hotel" className="hotel-image" />
-                  </div>
-                ))
-              ) : (
-                <p>No blogs available yet.</p>
-              )}
-          </div>
-        </div>
-      </div>
       <div className="blog-list-section">
-        <h2 style={{ fontWeight:"bold",fontSize:"40px",textAlign: "center"}}>Recent Blogs</h2>
+        <h3 className='pre-heading'>Story</h3>
+        <h2 className='heading'>Recent Blogs</h2>
         <div className="blog-list">
           {blogs.length > 0 ? (
             blogs.map((blog, index) => (
@@ -52,6 +28,32 @@ const Home = ({ blogs , hotelsData }) => {
           ) : (
             <p>No blogs available yet.</p>
           )}
+        </div>
+      </div>
+      <div className='recommended-hotels'>
+      <h3 className='pre-heading'>Stay</h3>
+        <h2 className='heading' >Rooms & Hotels</h2>
+        <div className='hotel-list'>
+        {  hotelsData ? (
+            hotelsData.slice(0 , 1).map((hotel, index) => (
+              <div key={index} className='hotel-card main-hotel-card'>
+                <img src={hotel.images[0] || 'default-hotel-image.jpg'} alt="Hotel" className="hotel-image" />
+              </div>
+            ))
+          ) : (
+            <p>No hotels available yet.</p>
+          )} 
+          <div className='rest-hotels'>     
+            {  hotelsData ? (
+                hotelsData.slice(14, 20).map((hotel, index) => (
+                  <div key={index} className='hotel-card'>
+                    <img src={hotel.images[0] || 'default-hotel-image.jpg'} alt="Hotel" className="hotel-image" />
+                  </div>
+                ))
+              ) : (
+                <p>No hotels available yet.</p>
+              )}
+          </div>
         </div>
       </div>
       <Testimonials />

@@ -87,7 +87,7 @@ const PEXELS_API_KEY = 'jgXdXv1qjqOMr88dzyMnRtlAxHPfGxkCVbFgsRwv7OK4gN0VtvvixCtc
     };
 
     fetchHotels();
-  }, []);
+  });
 
   // Add new blog at the top
   const addBlog = (newBlog) => {

@@ -80,9 +80,6 @@ const NavBar = ({ isDarkMode, toggleDarkMode }) => {
         <Link to="/" className="navbar-logo" style={{ fontWeight: "bold" }}>
           <img className='logo' src={logo} alt='TRAVELIZE' />
         </Link>
-        <div className="menu-icon" onClick={toggleMenu}>
-          <i className={isOpen ? 'fas fa-times' : 'fas fa-bars'}></i>
-        </div>
         <ul className={`nav-menu ${isOpen ? 'active' : ''}`}>
           <li className="nav-item"><Link to="/" className="nav-links">Home</Link></li>
           <li className="nav-item"><Link to="/journey-planner" className="nav-links">Journey Planner</Link  ></li>
@@ -118,6 +115,9 @@ const NavBar = ({ isDarkMode, toggleDarkMode }) => {
           <div className={`switch ${isDarkMode ? 'dark' : 'light'}`}>
             <GiPlainCircle className="icon sun-icon" /> <FaMoon className="icon moon-icon" />
           </div>
+        </div>
+        <div className="menu-icon" onClick={toggleMenu}>
+          <i className={isOpen ? 'fas fa-times' : 'fas fa-bars'}></i>
         </div>
       </div>
     </nav>

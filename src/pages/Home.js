@@ -36,7 +36,7 @@ const Home = ({ blogs , hotelsData }) => {
         <div className='hotel-list'>
         {  hotelsData ? (
             hotelsData.slice(0 , 1).map((hotel, index) => (
-              <div key={index} className='hotel-card main-hotel-card'>
+              <div key={index} className=' main-hotel-card'>
                 <img src={hotel.images[0] || 'default-hotel-image.jpg'} alt="Hotel" className="hotel-image" />
               </div>
             ))

@@ -62,7 +62,7 @@ const JourneyPlanner = () => {
     return () => clearInterval(interval);
   });
   return (
-    <div className="journey-planner">
+    <div className="journey-planner page-margin-top">
       <SearchBar onSearch={handleSearch} />
       <div className="planner-content">
         <div className="itinerary-planner">

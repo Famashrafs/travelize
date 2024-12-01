@@ -19,7 +19,7 @@ const Hotels = ({hotelsData , error}) => {
   };
 
   return (
-    <div className="hotels-container">
+    <div className="hotels-container page-margin-top">
       <h1 className="hotels-title">Hotels</h1>
       {error && <p className="error-message">{error}</p>}
       <div className="hotel-list">

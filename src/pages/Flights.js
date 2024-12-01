@@ -40,7 +40,7 @@ const Flights = () => {
   }, []);
 
   return (
-    <div className="flight-container">
+    <div className="flight-container page-margin-top">
       <h1 className="flight-title">Flights</h1>
       {error && <p className="error-message">{error}</p>}
       <div className="flight-list">

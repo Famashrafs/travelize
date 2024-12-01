@@ -11,7 +11,7 @@ import Flights from './pages/Flights';
 import Hotels from './pages/Hotels';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import Blogs from './components/Blogs';
+import Blogs from './pages/Blogs';
 import BlogDetail from './components/BlogDetail';
 import JourneyPlanner from './pages/JourneyPlanner';
 import Login from './components/Login';

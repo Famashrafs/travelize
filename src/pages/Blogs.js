@@ -90,7 +90,7 @@ const Blog = () => {
   };
 
   return (
-    <div className="blog-page-container">
+    <div className="blog-page-container page-margin-top">
       <div className="personal-info">
         <img src={personalInfo.profilePicUrl || defaultProfile} alt={`${personalInfo.displayName}'s profile`} style={{width:"50px",height:"50px",borderRadius:"50%"}}/>
         <h3>{personalInfo.displayName}</h3>

@@ -80,6 +80,9 @@ input{
 .app {
   transition: background-color 1s, color 1s;
 }
+.page-margin-top{
+  margin-top: 70px !important;
+}
 .dark-mode {
   background-color: #02070b;
   color: #ffffff;

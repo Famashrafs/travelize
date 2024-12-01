@@ -411,7 +411,9 @@ body.dark-mode {
   justify-content: center;
   font-weight: bold;
 }
-
+.dark-mode .nav-links {
+  color: #fff;
+}
 .nav-links:hover {
   border-bottom: 2px solid #fff;
 }
@@ -438,12 +440,15 @@ body.dark-mode {
 }
 
 .nav-profile-pic span {
-  color: #fff;
+  color: #000;
   display: flex;
   gap: 5px;
+  font-weight: bold;
   align-items: center;
 }
-
+.dark-mode .nav-profile-pic span {
+  color: #fff;
+}
 .nav-profile-pic .fas {
   margin-left: 4px;
 }
@@ -1332,65 +1337,69 @@ input[type="text"], input[type="date"], select {
   }
 }
 /* Flight */
-.flight-container {
-  max-width: 1200px;
-  margin: 0 auto;
+.flight-card {
+  width: 350px;
+  margin: 20px auto;
+  background: #f3f4ff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: "Arial", sans-serif;
+}
+
+.ticket-section {
   padding: 20px;
+  color: #333;
 }
 
-.flight-title {
-  font-size: 3rem;
-  text-align: center;
-  margin-bottom: 2rem;
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #4a4acb;
+  margin-bottom: 20px;
 }
 
-.error-message {
-  color: red;
-  text-align: center;
-}
-
-.flight-list {
+.ticket-body {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
 }
 
-.flight-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.flight-card:hover {
-  transform: scale(1.05);
-}
-
-.flight-image {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-}
-
 .flight-info {
-  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
-.flight-info h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+.from-to,
+.details,
+.boarding {
+  display: grid;
+  gap: 5px;
 }
 
-.flight-info p {
-  margin: 5px 0;
+.from-to strong,
+.details strong,
+.boarding strong {
+  font-size: 0.9rem;
+  color: #666;
 }
 
-@media (max-width: 768px) {
-  .flight-container {
-    padding: 10px;
-  }
+.from-to p,
+.details p,
+.boarding p {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
 }
+
+.barcode {
+  text-align: center;
+  margin-top: 20px;
+}
+
 /* blogs */
 .blog-page-container {
   display: flex;

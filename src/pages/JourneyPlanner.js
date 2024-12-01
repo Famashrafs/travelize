@@ -66,18 +66,8 @@ const JourneyPlanner = () => {
       <SearchBar onSearch={handleSearch} />
       <div className="planner-content">
         <div className="itinerary-planner">
-          <h2>Itinerary Planner</h2>
+          <h2>Plan Your Journey</h2>
           <form onSubmit={handleSubmit} className="planner-form">
-            <label>
-              Destinations & Dates
-              <input 
-                type="text" 
-                placeholder="Country, Region, or City" 
-                value={destinations}
-                onChange={(e) => setDestinations(e.target.value)}
-                required
-              />
-            </label>
             <div className="date-inputs">
               <input 
                 type="date" 

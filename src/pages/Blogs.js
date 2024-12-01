@@ -81,12 +81,14 @@ const Blog = () => {
       setSecondImage(null);
       setIsCreatingBlog(false);
     }
+    window.location.reload();
   };
 
   const handleDelete = (index) => {
     const updatedBlogs = blogs.filter((_, i) => i !== index);
     setBlogs(updatedBlogs);
     localStorage.setItem('blogs', JSON.stringify(updatedBlogs));
+    window.location.reload();
   };
 
   return (

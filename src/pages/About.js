@@ -1,5 +1,6 @@
 import React from 'react';
-
+import img1 from "../images/user-1.jpg"
+import img2 from "../images/user-2.jpg"
 const About = () => {
   return (
     <div className="about-container page-margin-top">
@@ -36,11 +37,11 @@ const About = () => {
         <h2>Meet Our Team</h2>
         <div className="team-members">
           <div className="team-member">
-            <img src="/images/founder.jpg" alt="Founder" />
+            <img src={img2} alt="Founder" />
             <p><strong>John Doe</strong><br />Founder & CEO</p>
           </div>
           <div className="team-member">
-            <img src="/images/developer.jpg" alt="Lead Developer" />
+            <img src={img1} alt="Lead Developer" />
             <p><strong>Jane Smith</strong><br />Lead Developer</p>
           </div>
         </div>

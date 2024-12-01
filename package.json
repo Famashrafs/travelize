@@ -16,6 +16,7 @@
     "express": "^4.19.2",
     "firebase": "^10.12.4",
     "fs": "^0.0.1-security",
+    "jsbarcode": "^3.11.6",
     "leaflet": "^1.9.4",
     "libphonenumber-js": "^1.11.4",
     "mapbox-gl": "^3.5.2",

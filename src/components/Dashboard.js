@@ -110,6 +110,7 @@ const Dashboard = ({ setUserData }) => {
       setError('Failed to update profile.');
       console.error('Error updating profile:', error);
     }
+    window.location.reload();
   };
 
   const handlePasswordChangeToggle = () => {
@@ -153,7 +154,7 @@ const Dashboard = ({ setUserData }) => {
   }
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container page-margin-top">
       <div className="sidebar">
         <div className='profile-pic-container'>
           <img src={userData.profilePicUrl || 'default-profile.png'} alt="Profile" className="profile-pic" />
@@ -176,7 +177,7 @@ const Dashboard = ({ setUserData }) => {
             </button>
           </div>
         )}
-        <h1>Welcome, {userData?.firstName || 'User'}</h1>
+        <h1>Welcome, {userData?.displayName || 'User'}</h1>
         <form onSubmit={handleUpdateProfile}>
           <div className="form-group">
             <FontAwesomeIcon icon={faEnvelope} />

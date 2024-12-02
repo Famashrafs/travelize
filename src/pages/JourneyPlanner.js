@@ -20,7 +20,7 @@ const JourneyPlanner = () => {
   const [imageData, setImageData] = useState([]);
   const handleSearch = async (query) => {
     setSearchQuery(query);
-  
+    setDestinations(query)
     // Fetch images based on search query using Pexels API
     const response = await axios.get(`https://api.pexels.com/v1/search?query=${query}&per_page=10`, {
       headers: {
@@ -63,7 +63,7 @@ const JourneyPlanner = () => {
   });
   return (
     <div className="journey-planner page-margin-top">
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={handleSearch}  />
       <div className="planner-content">
         <div className="itinerary-planner">
           <h2>Plan Your Journey</h2>

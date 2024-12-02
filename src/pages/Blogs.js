@@ -114,7 +114,7 @@ const Blog = () => {
               </div>
               <div className="form-group">
                 <label htmlFor="content">Content</label>
-                <textarea style={{width:"500px",height:"200px", border:"1px solid #ddd"}} id="content" value={content} onChange={(e) => setContent(e.target.value)} required />
+                <textarea style={{width:"300px",height:"200px", border:"1px solid #777"}} id="content" value={content} onChange={(e) => setContent(e.target.value)} required />
               </div>
               <div className="form-group">
                 <label htmlFor="image">Blog Cover</label>

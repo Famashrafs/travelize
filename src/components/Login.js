@@ -115,7 +115,7 @@ const Login = () => {
   };
 
   return (
-    <div className='login-page'>
+    <div className='login-page page-margin-top'>
       <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md login-form">
         <h2 className="text-2xl font-semibold mb-4">Login</h2>
         <form onSubmit={handleLogin}>

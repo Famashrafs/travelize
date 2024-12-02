@@ -94,8 +94,10 @@ const Blog = () => {
   return (
     <div className="blog-page-container page-margin-top">
       <div className="personal-info">
-        <img src={personalInfo.profilePicUrl || defaultProfile} alt={`${personalInfo.displayName}'s profile`} style={{width:"50px",height:"50px",borderRadius:"50%"}}/>
-        <h3>{personalInfo.displayName}</h3>
+        <div className='loged-info'>
+          <img src={personalInfo.profilePicUrl || defaultProfile} alt={`${personalInfo.displayName}'s profile`} style={{width:"50px",height:"50px",borderRadius:"50%"}}/>
+          <h3>{personalInfo.displayName}</h3>
+        </div>
         <button className="create-blog-btn" onClick={() => setIsCreatingBlog(!isCreatingBlog)}>
           Create a New Blog Post
         </button>

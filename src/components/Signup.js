@@ -88,7 +88,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md page-margin-top">
       <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
       <form onSubmit={handleSignup}>
         <label className="block mb-2">

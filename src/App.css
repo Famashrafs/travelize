@@ -1152,24 +1152,13 @@ input[type="text"], input[type="date"], select {
   background-image: url(../src/images/login.jpg);
   background-position: center;
   background-size: cover;
-  transition: all 1s;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding: 50px;
 }
-.login-page::after{
-  content: "";
-  width: 100%;
-  background-color: transparent;
-  position: absolute;
-  top: 0;
-  left: 0;
-  filter: blur(1);
-}
 .dark-mode .login-page {
   background-image: url(../src/images/login-dark.jpg);
-  transition: all 1s;
 }
 .login-form {
   background: #ffffff4f;

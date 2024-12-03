@@ -129,6 +129,7 @@ const Login = () => {
               className={`form-input ${inputErrors.email ? 'error' : ''}`}
               required
               placeholder=" "
+              style={{ paddingTop: "1.5rem"}}
             />
             <label className="floating-label">Email</label>
             {inputErrors.email && <span className="error-message">{inputErrors.email}</span>}
@@ -143,6 +144,7 @@ const Login = () => {
               className={`form-input ${inputErrors.password ? 'error' : ''}`}
               required
               placeholder=" "
+              style={{ paddingTop: "1.5rem"}}
             />
             <label className="floating-label">Password</label>
             <span className="password-toggle" onClick={togglePasswordVisibility}>

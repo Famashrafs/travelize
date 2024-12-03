@@ -12,7 +12,7 @@ body {
   text-align: center;
   font-weight: 300;
   text-transform: uppercase;
-  color: #5b6c65;
+  color: var(--secondary-color, #6ec7ff);
 }
 .dark-mode .heading {
   color: #f9b237;
@@ -67,7 +67,7 @@ input{
   --navbar-background: #5db0ef;
   --navbar-link-color: #ffffff;
   --primary-color :#ffdf97;
-  --secondary-color:#5b6c65;
+  --secondary-color:#00484a;
 }
 
 .dark-mode {
@@ -110,6 +110,7 @@ body, html {
   display: flex;
   justify-content: center;
   background-image: url(./images/landing.jpg);
+  background-position: center;
   background-repeat: no-repeat;
   flex-direction: column;
   align-items: center;
@@ -134,7 +135,7 @@ body, html {
   text-align: center;
   color: #ffffff;
   padding: 0 20px;
-  margin-top: 50px;
+  margin-top: 100px;
   z-index: 1;
 }
 
@@ -155,7 +156,7 @@ body, html {
   font-weight: 400;
   font-style: normal;
   font-size: 10vw;
-  color: var(--secondary-color, #5b6c65);
+  color: var(--secondary-color);
   position: relative;
   transition: all 1s;
 }
@@ -179,7 +180,7 @@ body, html {
   padding: 20px;
   cursor: pointer;
   color: #f4dca1;
-  background-color: #5b6c65;
+  background-color: var(--secondary-color, #6ec7ff);
   transition: transform 0.2s, background-color 0.2s;
 }
 .dark-mode .card{
@@ -193,7 +194,7 @@ body, html {
 .card:hover {
   transform: translateY(-5px);
   background-color: #f4dca1;
-  color: #5b6c65;
+  color: var(--secondary-color, #6ec7ff);
 
 }
 
@@ -784,7 +785,7 @@ button {
     left: 0;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-    background-color: #046a7e;
+    background-color: #d4dfdf;
   }
   .dark-mode  .nav-menu {
     background-color: #092136;
@@ -818,29 +819,31 @@ button {
 .login{
   margin: 0px 10px 0px 20px;
   padding: 5px 15px;
-  background-color: #22c55e;
-  color: #fff;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  font-weight: bold;
   border: 2px solid transparent;
-  border-radius: 5px;
+  border-radius: 20px;
 }
 .signup{
   margin: 0px 0px 0px 10px;
   padding: 5px 15px;
-  background-color: #3b82f6;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  font-weight: bold;
   border: 2px solid transparent;
-  border-radius: 5px;
+  border-radius: 20px;
 }
 .login:hover{
   background-color: transparent;
-  color: #22c55e;
-  border: 2px solid #22c55e;
+  color: var(--secondary-color);
+  border: 2px solid var(--secondary-color);
   transition: all .5s;
 }
 .signup:hover{
   background-color: transparent;
-  color: #fff;
-  border: 2px solid #3b82f6;
+  color: var(--secondary-color);
+  border: 2px solid var(--primary-color);
   transition: all .5s;
 }
 .logout{
@@ -1144,6 +1147,7 @@ input[type="text"], input[type="date"], select {
   color: #000;
 }
 .login-page {
+  position: relative;
   height: 100vh;
   background-image: url(../src/images/login.jpg);
   background-position: center;
@@ -1151,46 +1155,39 @@ input[type="text"], input[type="date"], select {
   transition: all 1s;
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Align the form to the right */
-  padding-right: 50px; /* Add some padding to the right for spacing */
+  justify-content: flex-end;
+  padding: 50px;
 }
-
+.login-page::after{
+  content: "";
+  width: 100%;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: blur(1);
+}
 .dark-mode .login-page {
   background-image: url(../src/images/login-dark.jpg);
   transition: all 1s;
 }
-
-.shadow-md {
-  --tw-shadow: 0 5px 10px 0px rgb(255 255 255 / .5), 0 2px 4px -2px rgb(0 0 0 / 1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
 .login-form {
-  background: #fff; 
-  width: 40%;
+  background: #ffffff4f;
+  width: 100%;
   max-width: 500px;
   padding: 40px;
   border-radius: 8px;
   transition: all 1s;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 0px 5px 2px #111;
 }
 
 .login-form h2 {
-  font-size: 2.5em; /* Make the h2 larger */
-  color: var(--secondary-color, #5b6c65); /* Replace with the actual secondary dark mode color */
-  margin-bottom: 20px; /* Add some margin below the h2 */
+  font-size: 2.5em;
+  color: #000; 
+  margin-bottom: 20px; 
 }
-
-.dark-mode .login-form {
-  background: var(--primary-color); /* Ensure dark mode background is applied */
-}
-
-.dark-mode .login-form h2 {
-  color: var(--secondary-color); /* Ensure dark mode h2 color is applied */
-}
-
 .input-container {
   position: relative;
   margin-bottom: 2rem;
@@ -1447,7 +1444,7 @@ input[type="text"], input[type="date"], select {
   }
 }
 .dark-mode .personal-info{
-  background-color: #222;
+  background-color: #092136;
 }
 .create-blog-btn {
   background-color: #000;
@@ -1776,13 +1773,11 @@ input[type="text"], input[type="date"], select {
 }
 .world-map {
   width: 700px;
-  height: 500px;
 }
 
 .form-container {
   flex: 1;
   padding: 2rem;
-  background-color: white;
 }
 
 form {
@@ -1799,6 +1794,7 @@ input, textarea {
   padding: 0.8rem;
   border: 1px solid #777;
   border-radius: 5px;
+  color: #000;
 }
 
 .contact-submit-button {

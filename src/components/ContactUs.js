@@ -6,8 +6,9 @@ const ContactUs = () => {
         <h2 className='pre-heading'>Speak</h2>
         <h2 className='heading'>Contact Us</h2>
         <div className='contact-container'>
-          <img src={contact} alt="World Map" className="world-map" />
-          
+          <div className="world-map" > 
+            <img src={contact} alt="World Map"/>
+          </div>
           <div className="form-container">
             <form>
               <label>

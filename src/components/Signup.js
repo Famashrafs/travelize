@@ -88,11 +88,11 @@ const Signup = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md page-margin-top">
+    <div className="max-w-md mx-auto p-6  rounded-lg shadow-md page-margin-top">
       <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
       <form onSubmit={handleSignup}>
         <label className="block mb-2">
-          <span className="text-gray-700">First Name</span>
+          <span>First Name</span>
           <input
             type="text"
             value={firstName}
@@ -102,7 +102,7 @@ const Signup = () => {
           />
         </label>
         <label className="block mb-2">
-          <span className="text-gray-700">Last Name</span>
+          <span >Last Name</span>
           <input
             type="text"
             value={lastName}
@@ -112,7 +112,7 @@ const Signup = () => {
           />
         </label>
         <label className="block mb-2">
-          <span className="text-gray-700">Email</span>
+          <span >Email</span>
           <input
             type="email"
             value={email}
@@ -122,7 +122,7 @@ const Signup = () => {
           />
         </label>
         <label className="block mb-2">
-          <span className="text-gray-700">Password</span>
+          <span >Password</span>
           <div className="relative">
             <input
               type={showPassword ? 'text' : 'password'}
@@ -141,7 +141,7 @@ const Signup = () => {
           </div>
         </label>
         <label className="block mb-2">
-          <span className="text-gray-700">Confirm Password</span>
+          <span >Confirm Password</span>
           <div className="relative">
             <input
               type={showConfirmPassword ? 'text' : 'password'}
@@ -160,7 +160,7 @@ const Signup = () => {
           </div>
         </label>
         <label className="block mb-2">
-          <span className="text-gray-700">Country</span>
+          <span >Country</span>
           <div className="flex items-center mb-4">
             <Flag
               code={selectedCountry.code}
@@ -180,7 +180,7 @@ const Signup = () => {
           </div>
         </label>
         <label className="block mb-2">
-          <span className="text-gray-700">Phone Number</span>
+          <span >Phone Number</span>
           <div className="flex items-center">
             <Flag
               code={selectedCountry.code}
@@ -197,7 +197,7 @@ const Signup = () => {
           </div>
         </label>
         <label className="block mb-2">
-          <span className="text-gray-700">Date of Birth</span>
+          <span >Date of Birth</span>
           <input
             type="date"
             value={dob}
@@ -207,7 +207,7 @@ const Signup = () => {
           />
         </label>
         <label className="block mb-2">
-          <span className="text-gray-700">Profile Picture</span>
+          <span >Profile Picture</span>
           <input
             type="file"
             onChange={handleProfilePicChange}

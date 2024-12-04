@@ -93,7 +93,7 @@ const NavBar = ({ isDarkMode, toggleDarkMode }) => {
               <li>
                 <div className="nav-profile-pic" onClick={toggleDropdown}>
                   <img src={userData?.profilePicUrl || '../images/avater.png'} alt="Profile" className="nav-profile-pic-img" />
-                  <span>{userData?.displayName || `${userData?.firstName} ${userData?.lastName}` || 'User'} <i className="fas fa-caret-down"></i></span>
+                  <span>{`${userData?.firstName} ${userData?.lastName}`? `${userData?.firstName} ${userData?.lastName}` : "User"} <i className="fas fa-caret-down"></i></span>
                 </div>
                 {dropdownOpen && (
                   <ul className="dropdown-menu">

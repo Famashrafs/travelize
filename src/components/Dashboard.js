@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth';
 import Loading from '../components/Loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faPhone, faFlag, faCalendar, faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faEnvelope, faPhone, faFlag, faCalendar, faCamera } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = ({ setUserData }) => {
   const [userData, setLocalUserData] = useState({
@@ -20,7 +20,6 @@ const Dashboard = ({ setUserData }) => {
   });
   const [loading, setLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
   const [error, setError] = useState('');
   const [passwordChangeMode, setPasswordChangeMode] = useState(false);
   const [oldPassword, setOldPassword] = useState('');
@@ -37,17 +36,14 @@ const Dashboard = ({ setUserData }) => {
           const docRef = doc(db, 'users', user.uid);
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
-            const data = docSnap.data();
-            setLocalUserData(data);
-            setUserData(data); // Update the userData in App
+              const updatedData = docSnap.data();
+              setLocalUserData(updatedData);
+              setUserData(updatedData);
 
             // Check if user signed in with Google
             setIsGoogleUser(user.providerData.some(provider => provider.providerId === 'google.com'));
 
             // Show alert if profile is incomplete
-            if (!data.phone || !data.country || !data.dob) {
-              setShowAlert(true);
-            }
           } else {
             console.log('No such document!');
           }
@@ -103,7 +99,16 @@ const Dashboard = ({ setUserData }) => {
 
     try {
       const docRef = doc(db, 'users', user.uid);
-      await updateDoc(docRef, userData);
+      await updateDoc(docRef, {
+        ...userData,
+        isProfileComplete: !!(userData.email && userData.phone && userData.country && userData.dob),
+    }); 
+
+    setLocalUserData({
+      ...userData,
+      isProfileComplete: !!(userData.email && userData.phone && userData.country && userData.dob),
+    });
+
       setEditMode(false);
       navigate('/dashboard'); // Reload and navigate to dashboard
     } catch (error) {
@@ -146,12 +151,13 @@ const Dashboard = ({ setUserData }) => {
   };
 
   const handleCompleteProfile = () => {
-    navigate('/profile-setup');
+    setEditMode(true);
   };
 
   if (loading) {
     return <Loading />;
   }
+  console.log(userData);
 
   return (
     <div className="dashboard-container page-margin-top">
@@ -169,7 +175,7 @@ const Dashboard = ({ setUserData }) => {
         </button>
       </div>
       <div className="main-content">
-        {showAlert && (
+        { userData && !userData.isProfileComplete && (
           <div className="alert">
             <p>We want to know more about you. Complete your profile now.</p>
             <button onClick={handleCompleteProfile} className="alert-button">
@@ -177,8 +183,38 @@ const Dashboard = ({ setUserData }) => {
             </button>
           </div>
         )}
-        <h1>Welcome, {userData?.displayName || 'User'}</h1>
+        <h1>Welcome, {userData.firstName }</h1>
         <form onSubmit={handleUpdateProfile}>
+        <div className="form-group">
+            <FontAwesomeIcon icon={faUser} />
+            <label>First Name:</label>
+            {editMode ? (
+              <input
+                type="text"
+                name="firstName"
+                value={userData.firstName}
+                onChange={handleChange}
+                style={{ borderColor: !userData.firstName ? '#d11544' : '' }}
+              />
+            ) : (
+              <p>{userData.firstName || 'N/A'}</p>
+            )}
+          </div>
+          <div className="form-group">
+            <FontAwesomeIcon icon={faUser} />
+            <label>Last Name:</label>
+            {editMode ? (
+              <input
+                type="text"
+                name="lastName"
+                value={userData.lastName}
+                onChange={handleChange}
+                style={{ borderColor: !userData.lastName ? '#d11544' : '' }}
+              />
+            ) : (
+              <p>{userData.lastName || 'N/A'}</p>
+            )}
+          </div>
           <div className="form-group">
             <FontAwesomeIcon icon={faEnvelope} />
             <label>Email:</label>

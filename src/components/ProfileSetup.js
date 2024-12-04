@@ -102,7 +102,7 @@ const ProfileSetup = () => {
   };
 
   return (
-    <div className="profile-setup">
+    <div className="profile-setup page-margin-top">
       <h1>Edit Profile</h1>
       <div className="form-group">
         <label>First Name</label>

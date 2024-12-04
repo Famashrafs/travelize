@@ -596,6 +596,7 @@ body.dark-mode {
   display: block;
   width: 100px;
   margin-left: 20px;
+  margin-bottom: 0;
 }
 input[type="text"],
 input[type="email"],
@@ -1574,7 +1575,7 @@ input[type="text"], input[type="date"], select {
   top: 150px;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 10;
   text-align: center;
   font-weight: bold;
   font-size: 50px;

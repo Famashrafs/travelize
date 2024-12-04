@@ -68,10 +68,12 @@ const NavBar = ({ isDarkMode, toggleDarkMode }) => {
 
   const handleEditProfile = () => {
     navigate('/profile-setup');
+    setIsOpen(false)
   };
 
   const handleDashboard = () => {
     navigate('/dashboard');
+    setIsOpen(false)
   };
   const handelClose = () => {
     setIsOpen(false)

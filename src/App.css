@@ -150,7 +150,9 @@ body, html {
   z-index: 0;
   transition: all 1s;
 }
-
+.dark-mode .landing-page h1{
+  color: #02070b;
+}
 .landing-page h2 {
   font-family: "Bebas Neue", sans-serif;
   font-weight: 400;
@@ -509,7 +511,6 @@ body.dark-mode {
 }
 .sidebar {
   width: 250px;
-  background-color: #f4f4f4;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -543,7 +544,9 @@ body.dark-mode {
   padding: 5px;
   border-radius: 50%;
 }
-
+.dark-mode .change-profile-pic{
+  background-color: #000;
+}
 .btn-edit,
 .btn-logout {
   background-color: #4caf50;
@@ -820,7 +823,7 @@ button {
 .login{
   margin: 0px 10px 0px 20px;
   padding: 5px 15px;
-  background-color: var(--secondary-color);
+  background-color: #091c30;
   color: var(--primary-color);
   font-weight: bold;
   border: 2px solid transparent;
@@ -830,7 +833,7 @@ button {
   margin: 0px 0px 0px 10px;
   padding: 5px 15px;
   background-color: var(--primary-color);
-  color: var(--secondary-color);
+  color: #091c30;
   font-weight: bold;
   border: 2px solid transparent;
   border-radius: 20px;

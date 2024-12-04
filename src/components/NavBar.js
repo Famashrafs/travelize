@@ -73,7 +73,9 @@ const NavBar = ({ isDarkMode, toggleDarkMode }) => {
   const handleDashboard = () => {
     navigate('/dashboard');
   };
-
+  const handelClose = () => {
+    setIsOpen(false)
+  }
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -81,13 +83,13 @@ const NavBar = ({ isDarkMode, toggleDarkMode }) => {
           <img className='logo' src={logo} alt='TRAVELIZE' />
         </Link>
         <ul className={`nav-menu ${isOpen ? 'active' : ''}`}>
-          <li className="nav-item"><Link to="/" className="nav-links">Home</Link></li>
-          <li className="nav-item"><Link to="/journey-planner" className="nav-links">Journey Planner</Link  ></li>
-          <li className="nav-item"><Link to="/flights" className="nav-links">Flights</Link></li>
-          <li className="nav-item"><Link to="/hotels" className="nav-links">Hotels</Link></li>
-          <li className="nav-item"><Link to="/blogs" className="nav-links">Blogs</Link></li>
-          <li className="nav-item"><Link to="/about" className="nav-links">About</Link></li>
-          <li className="nav-item"><Link to="/contact" className="nav-links">Contact</Link></li>
+          <li className="nav-item" onClick={handelClose}><Link to="/" className="nav-links">Home</Link></li>
+          <li className="nav-item" onClick={handelClose}><Link to="/journey-planner" className="nav-links">Journey Planner</Link  ></li>
+          <li className="nav-item" onClick={handelClose}><Link to="/flights" className="nav-links">Flights</Link></li>
+          <li className="nav-item" onClick={handelClose}><Link to="/hotels" className="nav-links">Hotels</Link></li>
+          <li className="nav-item" onClick={handelClose}><Link to="/blogs" className="nav-links">Blogs</Link></li>
+          <li className="nav-item" onClick={handelClose}><Link to="/about" className="nav-links">About</Link></li>
+          <li className="nav-item" onClick={handelClose}><Link to="/contact" className="nav-links">Contact</Link></li>
           {user ? (
             <>
               <li>
@@ -97,17 +99,17 @@ const NavBar = ({ isDarkMode, toggleDarkMode }) => {
                 </div>
                 {dropdownOpen && (
                   <ul className="dropdown-menu">
-                    <li onClick={handleDashboard}><FaUserCircle /> Account</li>
+                    <li onClick={handleDashboard} ><FaUserCircle /> Account</li>
                     <li onClick={handleEditProfile}><FaCog /> Edit Profile</li>
-                    <li><FaSignOutAlt className="logout-icon" /><Logout /></li>
+                    <li onClick={handelClose}><FaSignOutAlt className="logout-icon" /><Logout /></li>
                   </ul>
                 )}
               </li>
             </>
           ) : (
             <>
-              <li className="login"><Link to="/login">Login</Link></li>
-              <li className="signup"><Link to="/signup">Sign up</Link></li>
+              <li className="login"  onClick={handelClose}><Link to="/login">Login</Link></li>
+              <li className="signup" onClick={handelClose}><Link to="/signup">Sign up</Link></li>
             </>
           )}
         </ul>

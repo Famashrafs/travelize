@@ -19,7 +19,7 @@ import Signup from './components/Signup';
 import Dashboard from './components/Dashboard';
 import ProfileSetup from './components/ProfileSetup';
 import Loading from './components/Loading';
-
+import ScrollToTopButton from "./components/ScrollToTopButton"
 import './App.css';
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -27,7 +27,6 @@ const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [blogs, setBlogs] = useState([]);
   const [hotelsData, setHotelsData] = useState([]);
-  const [setError] = useState(null);
   // add Hotels to home page 
 const PEXELS_API_KEY = 'jgXdXv1qjqOMr88dzyMnRtlAxHPfGxkCVbFgsRwv7OK4gN0VtvvixCtc'; 
 
@@ -81,7 +80,6 @@ const PEXELS_API_KEY = 'jgXdXv1qjqOMr88dzyMnRtlAxHPfGxkCVbFgsRwv7OK4gN0VtvvixCtc
         );
         setHotelsData(hotelsWithImages);
       } catch (err) {
-        setError('An error occurred while fetching hotel data.');
         console.error(err);
       }
     };
@@ -149,6 +147,7 @@ const PEXELS_API_KEY = 'jgXdXv1qjqOMr88dzyMnRtlAxHPfGxkCVbFgsRwv7OK4gN0VtvvixCtc
         <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="/profile-setup" element={user ? <ProfileSetup/> : <Navigate to="/dashboard" />} />
       </Routes>
+      <ScrollToTopButton />
       <Footer />
       </div>
     </Router>

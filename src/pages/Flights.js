@@ -1,98 +1,141 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import barcode from '../images/qrs.JPG';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlane } from '@fortawesome/free-solid-svg-icons';
 
 const Flights = () => {
-  const [flightsData, setFlightsData] = useState([]);
+  const [flights, setFlights] = useState([]);
   const [filteredFlights, setFilteredFlights] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchFlights = async () => {
+      const API_KEY = "ea0d5b20ea16c37e1461928406328a39"; // Replace with your API key
       const options = {
-        method: 'GET',
-        url: 'https://sky-scanner3.p.rapidapi.com/flights/search-one-way',
-        params: {
-          fromEntityId: 'PARI',
-          cabinClass: 'economy',
-        },
-        headers: {
-          'x-rapidapi-key': '2b1ea3327fmsh00039ebf1e3a31fp1df3d5jsna1907662abc5',
-          'x-rapidapi-host': 'sky-scanner3.p.rapidapi.com',
-        },
+        method: "GET",
+        url: `http://api.aviationstack.com/v1/flights?access_key=${API_KEY}`,
       };
 
       try {
         const response = await axios.request(options);
-        const flights = response.data.data.everywhereDestination?.results || [];
-        setFlightsData(flights);
-        setFilteredFlights(flights); // Initialize filteredFlights with all flights
+        const flightData = response.data.data || [];
+        setFlights(flightData);
+        setFilteredFlights(flightData);
       } catch (error) {
-        if (error.response && error.response.status === 403) {
-          setError('Forbidden: Please check your API key and permissions.');
-        } else if (error.response && error.response.status === 429) {
-          setError('Too Many Requests: You have exceeded your API rate limit.');
-        } else {
-          setError('An error occurred while fetching flight data.');
-        }
-        console.error('Error fetching flight data:', error);
+        setError("Failed to fetch flight data. Please try again.");
+        console.error("Error fetching flight data:", error);
       }
     };
 
     fetchFlights();
   }, []);
 
-  // Handle search query input change
-  const handleSearchChange = (e) => {
+  const handleSearch = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
 
-    // Filter flights based on location name
-    const filtered = flightsData.filter((flight) =>
-      flight.content?.location?.name.toLowerCase().includes(query)
+    // Filter flights based on departure airport, arrival airport, or flight number
+    const filtered = flights.filter((flight) =>
+      (flight.departure?.iata || "").toLowerCase().includes(query) ||
+      (flight.arrival?.iata || "").toLowerCase().includes(query) ||
+      (flight.flight?.number || "").toString().toLowerCase().includes(query)
     );
     setFilteredFlights(filtered);
   };
-  console.log(filteredFlights)
-  return (
-    <div className="flight-container page-margin-top">
-      <h1 className="flight-title">Flights</h1>
 
-      {/* Search bar */}
-      <div className="search-bar">
+  return (
+    <div className="flights-container page-margin-top">
+      <h1>Available Flights</h1>
+
+      {/* Search Input */}
+      <div className="search-container">
         <input
           type="text"
-          placeholder="Search by location..."
+          placeholder="Search by departure, arrival, or flight number"
           value={searchQuery}
-          onChange={handleSearchChange}
-          className="search-input"
+          onChange={handleSearch}
         />
       </div>
 
       {error && <p className="error-message">{error}</p>}
 
-      <div className="flight-list">
-        {filteredFlights && filteredFlights.length > 0 ? (
+      <div className="flights-list">
+        {filteredFlights.length > 0 ? (
           filteredFlights.map((flight, index) => (
-            <div key={index} className="flight-card">
-              <img
-                src={flight.content?.image?.url || 'default-flight-image.jpg'}
-                alt="flight"
-                className="flight-image"
-              />
-              <div className="flight-info">
-                <h2>{flight.id || 'No ID available'}</h2>
-                <div className='more-flight-info'>
-                  <p><strong>Location:</strong> {flight.content?.location?.name || 'N/A'}</p>
-                  <p><strong>Price:</strong> {flight.content?.flightQuotes?.cheapest?.price || 'N/A'}</p>
-                  <p><strong>Type:</strong> {flight.type || 'Not specified'}</p>
-                  <p><strong>Type:</strong> {flight.type || 'Not specified'}</p>
+            <div key={index} className="flight-ticket">
+              <div className="ticket-header">
+                <div className="sub-header">
+                  <div className="from-to">
+                    <strong>From:</strong>
+                    <h1>{flight.departure?.iata || "N/A"}</h1>
+                    <p>{flight.departure?.airport || "N/A"}</p>
+                    <span>{flight.flight_date || "N/A"}</span>
+                  </div>
+                  <FontAwesomeIcon icon={faPlane} className="plane" />
+                  <div className="from-to">
+                    <strong>To:</strong>
+                    <h1>{flight.arrival?.iata || "N/A"}</h1>
+                    <p>{flight.arrival?.airport || "N/A"}</p>
+                    <span>{flight.flight_date || "N/A"}</span>
+                  </div>
                 </div>
+                <div className="header-footer">
+                  <p>
+                    <strong>Passenger:</strong> John Doe
+                  </p>
+                  <p>
+                    <strong>Flight:</strong> {flight.flight?.number || "426"}
+                  </p>
+                  <p>
+                    <strong>Seat:</strong> {flight.arrival?.baggage || "A25"}
+                  </p>
+                  <p>
+                    <strong>Gate:</strong> {flight.departure?.gate || "F63"}
+                  </p>
+                  <p>
+                    <strong>Terminal:</strong> {flight.departure?.terminal || "4"}
+                  </p>
+                </div>
+              </div>
+              <div className="ticket-footer">
+                <h2>BOARDING PASS</h2>
+                <div className="sub-footer">
+                  <div className="from">
+                    <strong>FROM:</strong>
+                    <h1>{flight.departure?.iata || "N/A"}</h1>
+                  </div>
+                  <div className="to">
+                    <strong>To:</strong>
+                    <h1>{flight.arrival?.iata || "N/A"}</h1>
+                  </div>
+                </div>
+                <div className="pass-flight">
+                  <p>
+                    <strong>Passenger:</strong> John Doe
+                  </p>
+                  <p>
+                    <strong>Flight:</strong> {flight.flight?.number || "426"}
+                  </p>
+                </div>
+                <div className="seat-gate">
+                  <p>
+                    <strong>Seat:</strong> {flight.arrival?.baggage || "A25"}
+                  </p>
+                  <p>
+                    <strong>Gate:</strong> {flight.departure?.gate || "F63"}
+                  </p>
+                  <p>
+                    <strong>Terminal:</strong> {flight.departure?.terminal || "4"}
+                  </p>
+                </div>
+                <img src={barcode} alt="barcode" />
               </div>
             </div>
           ))
         ) : (
-          <p>No flights available for the selected location.</p>
+          <p>No flights available at the moment.</p>
         )}
       </div>
     </div>

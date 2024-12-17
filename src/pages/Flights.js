@@ -12,7 +12,7 @@ const Flights = () => {
 
   useEffect(() => {
     const fetchFlights = async () => {
-      const API_KEY = "ea0d5b20ea16c37e1461928406328a39"; // Replace with your API key
+      const API_KEY = "ea0d5b20ea16c37e1461928406328a39"; 
       const options = {
         method: "GET",
         url: `http://api.aviationstack.com/v1/flights?access_key=${API_KEY}`,
